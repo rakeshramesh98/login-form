@@ -8,7 +8,7 @@ const Welcome = () => {
   const [data,setData] = useState([]);
   useEffect(() => {
     axios.get('http://localhost:8080/show').then((res)=>{
-    setData(res)
+    setData(res.data)
     })
   },[]);
   return (

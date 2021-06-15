@@ -4,7 +4,24 @@ import { Form, Input, Button, Checkbox } from "antd";
 
 function Login() {
   const onFinish = (values) => {
-    const { username } = values;
+    console.log(values);
+    const { username,password } = values;
+    const userData={
+      name: username,
+      password: password
+    }
+    console.log(username,password);
+    fetch('http://localhost:8080/validate',{
+         method: "POST",
+         body: JSON.stringify(userData),
+         headers: {
+           'Accept': 'application/json',
+           'Content-Type': 'application/json'
+         },
+       }).then(resp=>{
+         console.log(resp)
+       })
+       
     localStorage.setItem("username", username);
 
   };
