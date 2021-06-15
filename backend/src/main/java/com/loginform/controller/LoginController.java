@@ -1,6 +1,7 @@
 package com.loginform.controller;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.loginform.vo.employeeResponse;
 import com.loginform.vo.user;
@@ -29,11 +31,12 @@ public class LoginController {
     @PostMapping(value = "/validate", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean validateCredentials(@RequestBody user User)
     {
+    	
+    	
     	if(User.getName().equals(username) && User.getPassword().equals(password))
-    	{
+    	{	
     		return true;
     	}
-    	
     		return false;
     }
     

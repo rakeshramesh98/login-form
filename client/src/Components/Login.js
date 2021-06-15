@@ -1,16 +1,23 @@
 import "antd/dist/antd.css";
 import "./Login.css";
 import { Form, Input, Button, Checkbox } from "antd";
+import { useState } from "react";
+import { Redirect } from "react-router-dom";
 
 function Login() {
+  var redi;
+  localStorage.setItem("redi", redi);
+  
+  const [redirect,setRedirect]=useState(redi);
+
   const onFinish = (values) => {
-    console.log(values);
+    
     const { username,password } = values;
     const userData={
       name: username,
       password: password
     }
-    console.log(username,password);
+    //console.log(JSON.stringify(userData));
     fetch('http://localhost:8080/validate',{
          method: "POST",
          body: JSON.stringify(userData),
@@ -19,10 +26,11 @@ function Login() {
            'Content-Type': 'application/json'
          },
        }).then(resp=>{
-         console.log(resp)
+        resp.json().then(data=>{setRedirect(data)})
        })
        
     localStorage.setItem("username", username);
+   
 
   };
 
@@ -73,12 +81,14 @@ function Login() {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit">
-              <a href="/welcome">Submit</a>
+            <Button type="primary" htmlType="submit" >
+              Submit 
             </Button>
           </Form.Item>
         </Form>
       </div>
+      {redirect ? <Redirect to="/welcome" />:<Redirect to="/" />}
+      
     </div>
   );
 }
