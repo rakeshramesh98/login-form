@@ -1,22 +1,16 @@
 import { Table } from "antd";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import "antd/dist/antd.css";
 import "./Welcome.css";
 const { Column } = Table;
 const Welcome = () => {
-  const data = [
-    {
-      key: "1",
-      empNumber: "872872",
-      empName: "Rakesh",
-      role: "PAT",
-    },
-    {
-      key: "2",
-      empNumber: "872871",
-      empName: "Raghu",
-      role: "PA",
-    },
-  ];
+  const [data,setData] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:8080/show').then((res)=>{
+    setData(res)
+    })
+  },[]);
   return (
     <div className="welcome">
       <div className="title">Welcome {localStorage.getItem("username")}</div>
